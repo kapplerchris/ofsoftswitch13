@@ -23,7 +23,7 @@ def print_indented(s,cur_indent):
                 sep = ""
                 while(m and m.group(2)[0] in "]}"):
                     nxt_indent = nxt_indent[:-indent_back]
-                    match_str+= sep+m.group(2)
+                    match_str = m.group(2)+sep+match_str
                     s = m.group(3)
                     m = pp_token.match(s)
                     sep = brace_sep
@@ -38,7 +38,12 @@ def print_indented(s,cur_indent):
     return "",nxt_indent
 
 while(True):
-    ln = raw_input("> ")
-    print ln
-    print_indented(ln,":: ")
+    try:
+        ln = raw_input("> ")
+        print ln
+        print_indented(ln,":: ")
+    except (EOFError, KeyboardInterrupt):
+        break
+print 'bye'
+    
 
